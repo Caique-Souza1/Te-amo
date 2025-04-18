@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #000000;
+            color: #fff;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            color: #ff0033;
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 20px 0 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-family: 'Dancing Script', cursive;
+            color: #ff0033;
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 15px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 10px 0;
+        }
+        
+        .counter {
+            text-align: center;
+            padding: 15px 0;
+        }
+        
+        .counter p {
+            margin-bottom: 10px;
+        }
+        
+        .count {
+            font-size: 1.2rem;
+            color: #ff0033;
+            font-weight: 600;
+        }
+        
+        .message-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin: 20px 0;
+        }
+        
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .music-button {
+            background-color: #ff0033;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff0033;
+            z-index: 1;
+            opacity: 0.3;
+            animation: fall linear forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 25px 0;
+        }
+        
+        /* Carrossel de imagens adaptável */
+        .carousel-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+        
+        .carousel {
+            display: flex;
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+        
+        .carousel-image {
+            min-width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .carousel-image img {
+            max-width: 100%;
+            max-height: 60vh; /* Altura máxima para não ocupar toda a tela */
+            object-fit: contain;
+        }
+        
+        .carousel-buttons {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        
+        .carousel-indicator.active {
+            background: #ff0033;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Prometo que eu te amo</h1>
+        
+        <div class="section counter">
+            <p>Estamos juntos há:</p>
+            <div class="count" id="time-counter">
+                <span id="days">0</span> dias,
+                <span id="hours">0</span> horas,
+                <span id="minutes">0</span> minutos e
+                <span id="seconds">0</span> segundos
+            </div>
+        </div>
+        
+        <hr>
+        
+        <h2 class="subtitle">A princesinha mais especial do mundo todo</h2>
+        
+        <div class="carousel-container">
+            <div class="carousel" id="image-carousel">
+                <!-- EDITE AS IMAGENS AQUI - Substitua os atributos src="" com o link de cada imagem -->
+                <div class="carousel-image"><img src="image1.jpg" alt="Imagem 1"></div>
+                <div class="carousel-image"><img src="image2.jpg" alt="Imagem 2"></div>
+                <div class="carousel-image"><img src="image3.png" alt="Imagem 3"></div>
+                <div class="carousel-image"><img src="image4.jpg" alt="Imagem 4"></div>
+                <div class="carousel-image"><img src="image5.jpg" alt="Imagem 5"></div>
+                <div class="carousel-image"><img src="image6.jpg" alt="Imagem 6"></div>
+                <div class="carousel-image"><img src="image7.jpg" alt="Imagem 7"></div>
+                <div class="carousel-image"><img src="image8.jpg" alt="Imagem 8"></div>
+                <!-- FIM DAS IMAGENS -->
+            </div>
+            <div class="carousel-buttons" id="carousel-indicators"></div>
+        </div>
+        
+        <hr>
+        
+        <div class="section">
+            <div id="message-display" class="message-text">Sei que o nosso relacionamento não tem te feito bem, mas eu prometo que eu tô tentando, e vendo toda maneira possível pra ser um melhor namorado pra você. Quero que a gente envelheça junto, que fiquemos juntos até a gente virar aqueles casais de velhinhos que ficam na varanda de mãos dadas vendo a rua. Quero ser um vom marido, a ponto da nossa me ter como exemplo, pra não namorar caras que não prestam. Quero acima de tudo, te fazer feliz, e fazer com que voce se sinta amada de verdade a cada segundo, que você nunca duvide do amor que eu sinto por você. Porque, em nenhum momento, eu deixei de te amar, a cada batida do meu coração eu te amo mais, e é como se cada batida fosse dedicada a você. Eu amo você e vivo por você. Sem você, eu não sei o que seria de mim, mas tenho certeza de que nem estaria mais vivo. Você me ajudou tanto, em tanta coisa. E eu sou tão burro e lerdo, que foi preciso você falar pra mim que queria terminar, pra eu abrir o meu olho, e perceber que eu estava te magoando todos os dias, praticamente o nosso relacionamento todo. Sei que pedir desculpas não apaga tudo e nem resolve nada. Mas eu vou provar que eu realmete te amo e que eu quero estar com você, vou me esforçar mais, para ser um namorado e uma companhia melhor, pra te compreender e te ajudar mais. Pra que você, perceba que eu realmente te amo, e que eu me arrependo profundamente, pela forma que eu tenho te tratado, e levado o nosso relacionamento até hoje. Por favor, não termina comigo, eu vou fazer com que esse última chance que você me deu valha a pena. Vou provar que eu te amo te verdade! Eu quero que você seja a minha princesinha pra sempre, eu te amo...
+            </div>
+        </div>
+    </div>
+    
+    <div class="music-player">
+        <button class="music-button" id="play-music">♫</button>
+        <audio id="background-music" loop>
+            <!-- Substitua por sua música -->
+            <source src="Oriente - Vagabundo e a Dama (part. Mumu Nayah).mp3" type="audio/mp3">
+        </audio>
+    </div>
+    
+    <script>
+        // Contador de tempo juntos
+        function updateCounter() {
+            const startDate = new Date('2024-05-24T00:00:00');
+            const now = new Date();
+            const diff = now - startDate;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        // Atualizar contador a cada segundo
+        updateCounter();
+        setInterval(updateCounter, 1000);
+        
+        // Controle de música
+        const playButton = document.getElementById('play-music');
+        const audio = document.getElementById('background-music');
+        
+        playButton.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+                playButton.innerHTML = '◼';
+            } else {
+                audio.pause();
+                playButton.innerHTML = '♫';
+            }
+        });
+        
+        // Controle do carrossel
+        const carousel = document.getElementById('image-carousel');
+        const indicators = document.getElementById('carousel-indicators');
+        const slides = carousel.querySelectorAll('.carousel-image');
+        let currentIndex = 0;
+        
+        // Criar indicadores
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('carousel-indicator');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            indicators.appendChild(dot);
+        });
+        
+        // Configurar evento de toque para navegação em dispositivos móveis
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        carousel.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleGesture();
+        });
+        
+        // Também permitir navegação por mouse (clique e arraste)
+        let mouseDown = false;
+        let startX, scrollLeft;
+        
+        carousel.addEventListener('mousedown', (e) => {
+            mouseDown = true;
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            mouseDown = false;
+        });
+        
+        carousel.addEventListener('mouseup', (e) => {
+            mouseDown = false;
+            // Se o movimento foi significativo, navegue para o próximo ou anterior
+            if (Math.abs(startX - (e.pageX - carousel.offsetLeft)) > 50) {
+                if (startX > (e.pageX - carousel.offsetLeft)) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        });
+        
+        function handleGesture() {
+            if (touchEndX < touchStartX - 50) {
+                // Deslizar para a esquerda
+                nextSlide();
+            } else if (touchEndX > touchStartX + 50) {
+                // Deslizar para a direita
+                prevSlide();
+            }
+        }
+        
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Atualizar indicadores
+            document.querySelectorAll('.carousel-indicator').forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateCarousel();
+        }
+        
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+        
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+        
+        // Animação de corações caindo
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = -30 + 'px'; // Começar acima da página
+            heart.style.opacity = Math.random() * 0.4 + 0.1; // Opacidade entre 0.1 e 0.5
+            heart.style.fontSize = Math.random() * 15 + 15 + 'px';
+            
+            const duration = Math.random() * 5 + 5;
+            heart.style.animationDuration = duration + 's';
+            
+            document.body.appendChild(heart);
+            
+            // Remove o coração depois da animação terminar
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        
+        // Criar corações a cada 300ms
+        setInterval(createHeart, 300);
+        
+        // Verificar se há imagens com src vazio e ocultar indicadores se necessário
+        function checkEmptyImages() {
+            let emptyCount = 0;
+            slides.forEach((slide) => {
+                const img = slide.querySelector('img');
+                if (!img.src || img.src === window.location.href) {
+                    emptyCount++;
+                }
+            });
+            
+            // Se todas as imagens estiverem vazias, ocultar o carrossel
+            if (emptyCount === slides.length) {
+                document.querySelector('.carousel-container').style.display = 'none';
+            }
+        }
+        
+        // Verificar imagens quando o site carregar
+        window.addEventListener('load', checkEmptyImages);
+    </script>
+</body>
+</html>
